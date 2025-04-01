@@ -1,0 +1,527 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+ρσ_modules.random = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+
+(function(){
+    var ρσ_seed_state, ρσ_get_random_byte;
+    ρσ_seed_state = (function(){
+        var ρσ_d = {};
+        ρσ_d["key"] = ρσ_list_decorate([]);
+        ρσ_d["key_i"] = 0;
+        ρσ_d["key_j"] = 0;
+        return ρσ_d;
+    }).call(this);
+    ρσ_get_random_byte = (function() {
+        var ρσ_anonfunc = function () {
+            var ρσ_unpack;
+            ρσ_seed_state.key_i = (ρσ_seed_state.key_i + 1) % 256;
+            ρσ_seed_state.key_j = (ρσ_seed_state.key_j + (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)]) % 256;
+            ρσ_unpack = [(ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)], 
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)]];
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)] = ρσ_unpack[0];
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)] = ρσ_unpack[1];
+            return (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(((ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)] + (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)]) % 256, ρσ_expr_temp)];
+        };
+        if (!ρσ_anonfunc.__module__) Object.defineProperties(ρσ_anonfunc, {
+            __module__ : {value: "random"}
+        });
+        return ρσ_anonfunc;
+    })();
+    function seed() {
+        var x = (arguments[0] === undefined || ( 0 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true)) ? seed.__defaults__.x : arguments[0];
+        var ρσ_kwargs_obj = arguments[arguments.length-1];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "x")){
+            x = ρσ_kwargs_obj.x;
+        }
+        var i, j, ρσ_unpack;
+        ρσ_seed_state.key_i = ρσ_seed_state.key_j = 0;
+        if (typeof x === "number") {
+            x = x.toString();
+        } else if (typeof x !== "string") {
+            throw new TypeError("unhashable type: '" + typeof x + "'");
+        }
+        for (var ρσ_Index1 = 0; ρσ_Index1 < 256; ρσ_Index1++) {
+            i = ρσ_Index1;
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] = i;
+        }
+        j = 0;
+        for (var ρσ_Index2 = 0; ρσ_Index2 < 256; ρσ_Index2++) {
+            i = ρσ_Index2;
+            j = (j + (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] + x.charCodeAt(i % x.length)) % 256;
+            ρσ_unpack = [(ρσ_expr_temp = ρσ_seed_state.key)[(typeof j === "number" && j < 0) ? ρσ_expr_temp.length + j : j], 
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i]];
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] = ρσ_unpack[0];
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof j === "number" && j < 0) ? ρσ_expr_temp.length + j : j] = ρσ_unpack[1];
+        }
+    };
+    if (!seed.__defaults__) Object.defineProperties(seed, {
+        __defaults__ : {value: {x:(new Date).getTime()}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["x"]},
+        __module__ : {value: "random"}
+    });
+
+    seed();
+    function random() {
+        var n, m, i;
+        n = 0;
+        m = 1;
+        for (var ρσ_Index3 = 0; ρσ_Index3 < 8; ρσ_Index3++) {
+            i = ρσ_Index3;
+            n += ρσ_get_random_byte() * m;
+            m *= 256;
+        }
+        return n / 0x10000000000000000;
+    };
+    if (!random.__module__) Object.defineProperties(random, {
+        __module__ : {value: "random"}
+    });
+
+    function randrange() {
+        var start, stop, step, width, n;
+        if (arguments.length === 1) {
+            return randbelow(int(arguments[0]));
+        }
+        start = int(arguments[0]);
+        stop = int(arguments[1]);
+        if (arguments.length < 3) {
+            step = 1;
+        } else {
+            step = int(arguments[2]);
+        }
+        width = stop - start;
+        if (step === 1) {
+            if (width > 0) {
+                return start + randbelow(width);
+            }
+            throw new ValueError("empty range for randrange()");
+        }
+        if (step > 0) {
+            n = Math.floor((width + step - 1) / step);
+        } else if (step < 0) {
+            n = Math.floor((width + step + 1) / step);
+        } else {
+            throw new ValueError("zero step for randrange()");
+        }
+        if (n <= 0) {
+            throw new ValueError("empty range in randrange(" + ρσ_str.format("{}", start) + ", " + ρσ_str.format("{}", stop) + ", " + ρσ_str.format("{}", step) + ")");
+        }
+        return start + step * randbelow(n);
+    };
+    if (!randrange.__module__) Object.defineProperties(randrange, {
+        __module__ : {value: "random"}
+    });
+
+    function randint(a, b) {
+        return int(random() * (b - a + 1) + a);
+    };
+    if (!randint.__argnames__) Object.defineProperties(randint, {
+        __argnames__ : {value: ["a", "b"]},
+        __module__ : {value: "random"}
+    });
+
+    function uniform(a, b) {
+        return random() * (b - a) + a;
+    };
+    if (!uniform.__argnames__) Object.defineProperties(uniform, {
+        __argnames__ : {value: ["a", "b"]},
+        __module__ : {value: "random"}
+    });
+
+    function randbelow(n) {
+        return Math.floor(random() * n);
+    };
+    if (!randbelow.__argnames__) Object.defineProperties(randbelow, {
+        __argnames__ : {value: ["n"]},
+        __module__ : {value: "random"}
+    });
+
+    function choice(seq) {
+        if (seq.length > 0) {
+            return seq[ρσ_bound_index(randbelow(seq.length), seq)];
+        } else {
+            throw new IndexError;
+        }
+    };
+    if (!choice.__argnames__) Object.defineProperties(choice, {
+        __argnames__ : {value: ["seq"]},
+        __module__ : {value: "random"}
+    });
+
+    function shuffle() {
+        var x = ( 0 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var random_f = (arguments[1] === undefined || ( 1 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true)) ? shuffle.__defaults__.random_f : arguments[1];
+        var ρσ_kwargs_obj = arguments[arguments.length-1];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "random_f")){
+            random_f = ρσ_kwargs_obj.random_f;
+        }
+        var j, ρσ_unpack, i;
+        for (var ρσ_Index4 = 0; ρσ_Index4 < x.length; ρσ_Index4++) {
+            i = ρσ_Index4;
+            j = Math.floor(random_f() * (i + 1));
+            ρσ_unpack = [x[(typeof j === "number" && j < 0) ? x.length + j : j], x[(typeof i === "number" && i < 0) ? x.length + i : i]];
+            x[(typeof i === "number" && i < 0) ? x.length + i : i] = ρσ_unpack[0];
+            x[(typeof j === "number" && j < 0) ? x.length + j : j] = ρσ_unpack[1];
+        }
+        return x;
+    };
+    if (!shuffle.__defaults__) Object.defineProperties(shuffle, {
+        __defaults__ : {value: {random_f:random}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["x", "random_f"]},
+        __module__ : {value: "random"}
+    });
+
+    function sample(population, k) {
+        var x, j, ρσ_unpack, i;
+        x = population.slice();
+        for (var ρσ_Index5 = population.length - 1; ρσ_Index5 > population.length - k - 1; ρσ_Index5-=1) {
+            i = ρσ_Index5;
+            j = Math.floor(random() * (i + 1));
+            ρσ_unpack = [x[(typeof j === "number" && j < 0) ? x.length + j : j], x[(typeof i === "number" && i < 0) ? x.length + i : i]];
+            x[(typeof i === "number" && i < 0) ? x.length + i : i] = ρσ_unpack[0];
+            x[(typeof j === "number" && j < 0) ? x.length + j : j] = ρσ_unpack[1];
+        }
+        return x.slice(population.length - k);
+    };
+    if (!sample.__argnames__) Object.defineProperties(sample, {
+        __argnames__ : {value: ["population", "k"]},
+        __module__ : {value: "random"}
+    });
+
+    ρσ_modules.random.ρσ_seed_state = ρσ_seed_state;
+    ρσ_modules.random.ρσ_get_random_byte = ρσ_get_random_byte;
+    ρσ_modules.random.seed = seed;
+    ρσ_modules.random.random = random;
+    ρσ_modules.random.randrange = randrange;
+    ρσ_modules.random.randint = randint;
+    ρσ_modules.random.uniform = uniform;
+    ρσ_modules.random.randbelow = randbelow;
+    ρσ_modules.random.choice = choice;
+    ρσ_modules.random.shuffle = shuffle;
+    ρσ_modules.random.sample = sample;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+
+    var version, print, arange, __name__, type, ρσ_ls, LA, KA, DIS_ASSI, DIS_VEL, DIS_SCIA, LX, LY, LZ, SX, SY, SZ, RMIN, RMAX, VM, BC, SC1, SC2, SC3, SC4, SO, VC, XW, YW, WW, HW, BR, scene, leffX, leffY, leffz, x, y, z, ball, wallR, wallL, wallU, wallD, wallB, wallF, vx, vy, vz, ball2, vscale, varr, deltat, t, tmax;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    var random = ρσ_modules.random.random;
+    var uniform = ρσ_modules.random.uniform;
+
+    "13";
+    async function disegna_assi(l, k) {
+        var ρσ_ls, asse_x, asse_y, asse_z, nome_asse_x, nome_asse_y, nome_asse_z;
+        "14";
+        asse_x = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ vec(0, 0, 0), vec(l, 0, 0) ])})]);
+        "15";
+        asse_y = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ vec(0, 0, 0), vec(0, l, 0) ])})]);
+        "16";
+        asse_z = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ vec(0, 0, 0), vec(0, 0, l) ])})]);
+        "18";
+        nome_asse_x = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: vec(l["*"](k), 0, 0), text: "x", box: false})]);
+        "19";
+        nome_asse_y = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: vec(0, l["*"](k), 0), text: "y", box: false})]);
+        "20";
+        nome_asse_z = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: vec(0, 0, l["*"](k)), text: "z", box: false})]);
+    };
+    if (!disegna_assi.__argnames__) Object.defineProperties(disegna_assi, {
+        __argnames__ : {value: ["l", "k"]},
+        __module__ : {value: null}
+    });
+
+    "22";
+    async function cambia_colore_oggetto(o) {
+        var ρσ_ls, r, g, b;
+        "23";
+        r = random();
+        "24";
+        g = random();
+        "25";
+        b = random();
+        "27";
+        o.color = vector(r, g, b);
+        "28";
+        try {
+            "29";
+            o.trail.visible = false;
+            "30";
+            o.trail = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: o.color})]);
+            "31";
+        } catch (ρσ_Exception) {
+            ρσ_last_exception = ρσ_Exception;
+            {
+                "32";
+                print("oggetto senza trail");
+            } 
+        }
+    };
+    if (!cambia_colore_oggetto.__argnames__) Object.defineProperties(cambia_colore_oggetto, {
+        __argnames__ : {value: ["o"]},
+        __module__ : {value: null}
+    });
+
+    "34";
+    LA = 10;
+    "35";
+    KA = 1.05;
+    "36";
+    DIS_ASSI = true;
+    "37";
+    DIS_VEL = false;
+    "38";
+    DIS_SCIA = false;
+    "40";
+    LX = 10;
+    "41";
+    LY = 7;
+    "42";
+    LZ = 5;
+    "43";
+    SX = .3;
+    "44";
+    SY = .1;
+    "45";
+    SZ = .2;
+    "49";
+    RMIN = .2;
+    "50";
+    RMAX = 1;
+    "52";
+    VM = 10;
+    "54";
+    BC = vec(0, 1, 1);
+    "55";
+    SC1 = vec(0, 1, 0);
+    "56";
+    SC2 = vec(0, 0, 1);
+    "57";
+    SC3 = vec(1, 0, 0);
+    "58";
+    SC4 = vec(0, 1, 1);
+    "59";
+    SO = .8;
+    "60";
+    VC = color.yellow;
+    "62";
+    XW = 0;
+    "63";
+    YW = 0;
+    "64";
+    WW = 1e3;
+    "65";
+    HW = 1e3;
+    "67";
+    BR = (await uniform(RMIN, RMAX));
+    "69";
+    scene = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({title: "ball in a box", x: XW, y: YW, width: WW, height: HW, center: vec(0, 0, 3), background: vector(0, 0, .15)})]);
+    "72";
+    if (DIS_ASSI) {
+        "73";
+        (await disegna_assi(LA, KA));
+    }
+    "75";
+    leffX = LX["/"](2)["-"](1["*"](SX)["/"](2))["-"](1["*"](BR));
+    "76";
+    leffY = LY["/"](2)["-"](1["*"](SY)["/"](2))["-"](1["*"](BR));
+    "77";
+    leffz = LZ["/"](2)["-"](1["*"](SZ)["/"](2))["-"](1["*"](SZ)["/"](2))["-"](1["*"](BR));
+    "79";
+    x = (await uniform(1["-u"]()["*"](leffX), leffX));
+    "80";
+    y = (await uniform(1["-u"]()["*"](leffY), leffY));
+    "81";
+    z = (await uniform(1["-u"]()["*"](leffz), leffz));
+    "83";
+    ball = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(x, y, z), radius: BR, color: BC})]);
+    "85";
+    wallR = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(LX["/"](2), 0, 0), size: vec(SX, LY["-"](1["*"](SY)), LZ), color: SC1, opacity: SO})]);
+    "86";
+    wallL = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](LX)["/"](2), 0, 0), size: vec(SX, LY["-"](1["*"](SY)), LZ), color: SC1, opacity: SO})]);
+    "88";
+    wallU = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, LY["/"](2), 0), size: vec(LX["+"](SX), SY, LZ), color: SC2, opacity: SO})]);
+    "89";
+    wallD = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, 1["-u"]()["*"](LY)["/"](2), 0), size: vec(LX["+"](SX), SY, LZ), color: SC2, opacity: SO})]);
+    "91";
+    wallB = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, 0, 1["-u"]()["*"](LZ)["/"](2)["+"](SZ["/"](2))), size: vec(LX["-"](1["*"](SX)), LY["-"](1["*"](SY)), SZ), color: SC3, opacity: SO})]);
+    "92";
+    wallF = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, 0, LZ["/"](2)["-"](1["*"](SZ)["/"](2))), size: vec(LX["-"](1["*"](SX)), LY["-"](1["*"](SY)), SZ), color: SC4, opacity: 0})]);
+    "95";
+    vx = (await uniform(1["-u"]()["*"](VM), VM));
+    "96";
+    vy = (await uniform(1["-u"]()["*"](VM), VM));
+    "97";
+    vz = (await uniform(1["-u"]()["*"](VM), VM));
+    "99";
+    ball.velocity = vector(vx, vy, vz);
+    "101";
+    x = (await uniform(1["-u"]()["*"](leffX), leffX));
+    "102";
+    y = (await uniform(1["-u"]()["*"](leffY), leffY));
+    "103";
+    z = (await uniform(1["-u"]()["*"](leffz), leffz));
+    "105";
+    ball2 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(x, y, z), radius: BR, color: BC})]);
+    "107";
+    vscale = .2;
+    "108";
+    if (DIS_VEL) {
+        "109";
+        varr = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: ball.pos, axis: vscale["*"](ball.velocity), color: VC})]);
+        "111";
+    }
+    if (DIS_SCIA) {
+        "112";
+        ball.trail = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: ball.color})]);
+    }
+    "114";
+    deltat = .01;
+    "115";
+    t = 0;
+    "116";
+    tmax = 1e3;
+    "117";
+    while (t["<"](tmax)) {
+        "118";
+        (await rate(1["/"](deltat)));
+        (await sleep(.1));
+        "119";
+        scene.autoscale = false;
+        "122";
+        if (ball.pos.x[">"](wallR.pos.x["-"](1["*"](BR))["-"](1["*"](SX)["/"](2)))) {
+            "123";
+            ball.velocity.x = 1["-u"]()["*"](ball.velocity.x);
+            "124";
+            (await cambia_colore_oggetto(ball));
+            "125";
+            (await cambia_colore_oggetto(wallR));
+            "127";
+        }
+        if (ball.pos.x["<"](wallL.pos.x["+"](BR)["+"](SX["/"](2)))) {
+            "128";
+            ball.velocity.x = 1["-u"]()["*"](ball.velocity.x);
+            "129";
+            (await cambia_colore_oggetto(ball));
+            "130";
+            (await cambia_colore_oggetto(wallL));
+            "132";
+        }
+        if (ball.pos.y[">"](wallU.pos.y["-"](1["*"](BR))["-"](1["*"](SY)["/"](2)))) {
+            "133";
+            ball.velocity.y = 1["-u"]()["*"](ball.velocity.y);
+            "134";
+            (await cambia_colore_oggetto(ball));
+            "135";
+            (await cambia_colore_oggetto(wallU));
+            "137";
+        }
+        if (ball.pos.y["<"](wallD.pos.y["+"](BR)["+"](SY["/"](2)))) {
+            "138";
+            ball.velocity.y = 1["-u"]()["*"](ball.velocity.y);
+            "139";
+            (await cambia_colore_oggetto(ball));
+            "140";
+            (await cambia_colore_oggetto(wallD));
+            "142";
+        }
+        if (ball.pos.z["<"](wallB.pos.z["+"](BR)["+"](SZ["/"](2)))) {
+            "143";
+            ball.velocity.z = 1["-u"]()["*"](ball.velocity.z);
+            "144";
+            (await cambia_colore_oggetto(ball));
+            "145";
+            (await cambia_colore_oggetto(wallB));
+            "147";
+        }
+        if (ball.pos.z[">"](wallF.pos.z["-"](1["*"](BR))["-"](1["*"](SZ)["/"](2)))) {
+            "148";
+            ball.velocity.z = 1["-u"]()["*"](ball.velocity.z);
+        }
+        "150";
+        ball.pos=ball.pos["+"](ball.velocity["*"](deltat));
+        "151";
+        if (DIS_VEL) {
+            "152";
+            varr.pos = ball.pos;
+            "153";
+            varr.axis = ball.velocity["*"](vscale);
+            "155";
+        }
+        if (DIS_SCIA) {
+            "156";
+            ρσ_interpolate_kwargs.call(ball.trail, ball.trail.append, [ρσ_desugar_kwargs({pos: ball.pos})]);
+        }
+        "159";
+        t = t["+"](deltat);
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
